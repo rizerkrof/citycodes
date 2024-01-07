@@ -13,9 +13,9 @@ schema = 3
   [mod."github.com/getkin/kin-openapi"]
     version = "v0.120.0"
     hash = "sha256-x5BjdRncVOy3t7HqmA6IwfYDg/xy3BsGjFawrnrXcko="
-  [mod."github.com/go-op/op"]
-    version = "v0.7.0"
-    hash = "sha256-tRKhChtKSknLeZzRKBz04cF84jy6/u5cIVwvFPaoBcM="
+  [mod."github.com/go-fuego/fuego"]
+    version = "v0.9.0"
+    hash = "sha256-5u+Z1YFaUlChi8C/Hhh8E7k6MCGRB7hv8VqC9066bOs="
   [mod."github.com/go-openapi/jsonpointer"]
     version = "v0.20.0"
     hash = "sha256-31YT6a8u7adrtEOV62066BrrNfPT5kg5uUUo9ULW0Qk="
@@ -40,9 +40,15 @@ schema = 3
   [mod."github.com/golang-jwt/jwt/v5"]
     version = "v5.1.0"
     hash = "sha256-aKcn8muzB9ANNIRsPy+IG2g/m0FHDLWd8XOJh69VDHs="
+  [mod."github.com/gomarkdown/markdown"]
+    version = "v0.0.0-20231115200524-a660076da3fd"
+    hash = "sha256-vLJoudzn+f4Um+mfJjy+rrM/CAJd81nqrKelPVd4KoI="
   [mod."github.com/google/uuid"]
     version = "v1.3.0"
     hash = "sha256-QoR55eBtA94T2tBszyxfDtO7/pjZZSGb5vm7U0Xhs0Y="
+  [mod."github.com/gorilla/schema"]
+    version = "v1.2.1"
+    hash = "sha256-kbPS0Lc3FpLm+QGoJwTRxw4fZm8l9MUO/GslLayn/sw="
   [mod."github.com/invopop/yaml"]
     version = "v0.2.0"
     hash = "sha256-RxeDuvwOSWYaLc8Q7T39rfFT3bZX3g9Bu0RFwxH6sLw="
@@ -70,9 +76,6 @@ schema = 3
   [mod."github.com/remyoudompheng/bigfft"]
     version = "v0.0.0-20230129092748-24d4a6f8daec"
     hash = "sha256-vYmpyCE37eBYP/navhaLV4oX4/nu0Z/StAocLIFqrmM="
-  [mod."github.com/rs/cors"]
-    version = "v1.10.1"
-    hash = "sha256-um4INJM5/675MLK42npIsDbSQ1/Iy5ZiUNuAFReUfeM="
   [mod."github.com/swaggo/files"]
     version = "v1.0.1"
     hash = "sha256-bNBmpJaM7g1BNwd7VxNIRSdY35NKSXhYHGfnZsSEUZ8="

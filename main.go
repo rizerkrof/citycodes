@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/go-op/op"
+	"github.com/go-fuego/fuego"
 	"citycodes/store"
 	"citycodes/controller"
 )
@@ -13,8 +13,8 @@ func main() {
 
 	api := controller.NewRessource(*queries)
 
-	app := op.NewServer(
-		op.WithPort(":8083"),
+	app := fuego.NewServer(
+		fuego.WithPort(":8083"),
 	)
 
 	api.Routes(app)
