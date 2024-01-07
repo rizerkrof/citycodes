@@ -15,7 +15,8 @@ func (rs Ressource) getAllCaches(c fuego.Ctx[any]) ([]store.Cache, error) {
 }
 
 func (rs Ressource) getCacheById(c fuego.Ctx[any]) (store.Cache, error) {
-	cache, err := rs.Queries.GetCache(c.Context(), "id")
+	id := c.Request().URL.Query().Get("id")
+	cache, err := rs.Queries.GetCache(c.Context(), id)
 	if err != nil {
 		return store.Cache{}, err
 	}

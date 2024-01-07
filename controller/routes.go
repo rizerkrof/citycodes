@@ -27,5 +27,6 @@ type Ressource struct {
 
 func (rs Ressource) Routes(s *fuego.Server) {
 	fuego.Get(s, "/caches/", rs.getAllCaches)
+	fuego.Get(s, "/caches/:id", rs.getCacheById).WithQueryParam("id", "The cache id.")
 	fuego.Post(s, "/caches/new", rs.newCache)
 }
