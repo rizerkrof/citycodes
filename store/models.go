@@ -6,7 +6,8 @@ package store
 
 import ()
 
-type Cache struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
+type SecretCache struct {
+	ID       string `json:"id"`
+	Name     string `json:"name"`
+	ImageUrl string `json:"image_url"`
 }

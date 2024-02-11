@@ -10,6 +10,7 @@
     }
   )
 , buildGoApplication ? pkgs.buildGoApplication
+,templ ? pkgs.templ
 }:
 
 buildGoApplication {
@@ -18,4 +19,7 @@ buildGoApplication {
   pwd = ./.;
   src = ./.;
   modules = ./gomod2nix.toml;
+  preBuild = ''
+    ${templ}/bin/templ generate
+  '';
 }

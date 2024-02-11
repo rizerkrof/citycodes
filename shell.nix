@@ -11,6 +11,9 @@
   )
 , mkGoEnv ? pkgs.mkGoEnv
 , gomod2nix ? pkgs.gomod2nix
+, sqlc ? pkgs.sqlc
+, go-migrate ? pkgs.go-migrate
+, templ ? pkgs.templ
 }:
 
 let
@@ -20,6 +23,8 @@ pkgs.mkShell {
   packages = [
     goEnv
     gomod2nix
-    pkgs.sqlc
+    sqlc
+    go-migrate
+    templ
   ];
 }

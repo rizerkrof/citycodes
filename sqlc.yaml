@@ -5,7 +5,7 @@ cloud:
     hostname: ""
 sql:
   - engine: "sqlite"
-    schema: "store/queries/_schema.sql"
+    schema: "store/migrations"
     queries: "store/queries"
     gen:
       go:

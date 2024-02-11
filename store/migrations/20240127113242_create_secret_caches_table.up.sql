@@ -1,0 +1,3 @@
+CREATE TABLE IF NOT EXISTS secret_cache (
+    id TEXT PRIMARY KEY, name TEXT NOT NULL, image_url TEXT NOT NULL
+);
