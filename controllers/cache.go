@@ -80,7 +80,7 @@ func (rs secretCacheRessource) newSecretCache(c fuego.Ctx[CreateSecretCache]) (s
 	return cache, nil
 }
 
-func (rs secretCacheRessource) addSecretCacheImage(c fuego.Ctx[CreateSecretCache]) (store.SecretCache, error) {
+func (rs secretCacheRessource) addSecretCacheImage(c fuego.Ctx[CreateSecretCache]) (any, error) {
 	slog.Info("image")
 	slog.Info(c.Request().URL.Query().Get("id"))
 	slog.Info("done")
@@ -137,5 +137,5 @@ func (rs secretCacheRessource) addSecretCacheImage(c fuego.Ctx[CreateSecretCache
 		return store.SecretCache{}, err
 	}
 
-	return secretCache, nil
+	return c.Redirect(301, "/secretCacheCode?id="+secretCache.ID)
 }
