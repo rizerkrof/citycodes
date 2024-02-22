@@ -27,12 +27,12 @@ type SecretCacheRepository interface {
 func (rs secretCacheRessource) Routes(s *fuego.Server) {
 	secretCacheRoutesGroupe := fuego.Group(s, "/secret-caches")
 	fuego.Get(secretCacheRoutesGroupe, "/", rs.getAllSecretCaches)
-	fuego.Get(secretCacheRoutesGroupe, "/unique", rs.getSecretCacheById).WithQueryParam("id", "The secret cache id.")
+	fuego.Get(secretCacheRoutesGroupe, "/unique", rs.getSecretCacheById).QueryParam("id", "The secret cache id.")
 	fuego.Post(secretCacheRoutesGroupe, "/new", rs.newSecretCache)
-	fuego.Post(secretCacheRoutesGroupe, "/image/new", rs.addSecretCacheImage).WithQueryParam("id", "The secret cache id.")
+	fuego.Post(secretCacheRoutesGroupe, "/image/new", rs.addSecretCacheImage).QueryParam("id", "The secret cache id.")
 }
 
-func (rs secretCacheRessource) getAllSecretCaches(c fuego.Ctx[any]) ([]store.SecretCache, error) {
+func (rs secretCacheRessource) getAllSecretCaches(c fuego.ContextNoBody) ([]store.SecretCache, error) {
 	caches, err := rs.SecretCacheRepository.GetSecretCaches(c.Context())
 	if err != nil {
 		return nil, err
@@ -43,7 +43,7 @@ func (rs secretCacheRessource) getAllSecretCaches(c fuego.Ctx[any]) ([]store.Sec
 	return caches, nil
 }
 
-func (rs secretCacheRessource) getSecretCacheById(c fuego.Ctx[any]) (store.SecretCache, error) {
+func (rs secretCacheRessource) getSecretCacheById(c fuego.ContextNoBody) (store.SecretCache, error) {
 	id := c.Request().URL.Query().Get("id")
 	cache, err := rs.SecretCacheRepository.GetSecretCache(c.Context(), id)
 	if err != nil {
@@ -58,7 +58,7 @@ type CreateSecretCache struct {
 	ImageUrl string `json:"imageUrl" validate:"required"`
 }
 
-func (rs secretCacheRessource) newSecretCache(c fuego.Ctx[CreateSecretCache]) (store.SecretCache, error) {
+func (rs secretCacheRessource) newSecretCache(c *fuego.ContextWithBody[CreateSecretCache]) (store.SecretCache, error) {
 	slog.Info("Neww cache ------------------")
 
 	body, err := c.Body()
@@ -80,7 +80,7 @@ func (rs secretCacheRessource) newSecretCache(c fuego.Ctx[CreateSecretCache]) (s
 	return cache, nil
 }
 
-func (rs secretCacheRessource) addSecretCacheImage(c fuego.Ctx[CreateSecretCache]) (any, error) {
+func (rs secretCacheRessource) addSecretCacheImage(c *fuego.ContextWithBody[CreateSecretCache]) (any, error) {
 	slog.Info("image")
 	slog.Info(c.Request().URL.Query().Get("id"))
 	slog.Info("done")

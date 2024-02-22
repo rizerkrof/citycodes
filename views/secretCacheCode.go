@@ -19,7 +19,7 @@ type SecretCacheRepository interface {
 	GetSecretCaches(ctx context.Context) ([]store.SecretCache, error)
 }
 
-func (rs Ressource) SecretCachePage(c fuego.Ctx[any]) (fuego.Templ, error) {
+func (rs Ressource) SecretCachePage(c fuego.ContextNoBody) (fuego.Templ, error) {
 	id := c.QueryParam("id")
 
 	secretCache, err := rs.SecretCacheRepository.GetSecretCache(c.Context(), id)
