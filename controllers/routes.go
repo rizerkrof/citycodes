@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"citycodes/services"
 	"time"
 
 	"github.com/go-fuego/fuego"
@@ -8,7 +9,7 @@ import (
 
 // Ressource is the struct that holds useful sources of informations available for the controllers.
 type Ressource struct {
-	SecretCacheRepository SecretCacheRepository
+	SecretCacheRepository services.SecretCacheRepository
 	ExternalAPI           interface{}            // External API
 	Cache                 map[string]interface{} // Some cache
 	Now                   func() time.Time       // Function to get the current time. Mocked in tests.
@@ -16,7 +17,9 @@ type Ressource struct {
 }
 
 func (rs Ressource) Routes(s *fuego.Server) {
-	secretCacheRessource{
-		SecretCacheRepository: rs.SecretCacheRepository,
+	SecretCacheControllerRessource{
+		SecretCacheService: services.SecretCacheServiceRessource{
+			SecretCacheRepository: rs.SecretCacheRepository,
+		},
 	}.Routes(s)
 }

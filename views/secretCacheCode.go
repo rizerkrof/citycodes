@@ -1,32 +1,37 @@
 package views
 
 import (
-	"citycodes/store"
+	"citycodes/services"
 	"citycodes/templates/pages"
-	"context"
 	"fmt"
 
 	"github.com/go-fuego/fuego"
 )
 
 type secretCacheRessource struct {
-	SecretCacheRepository SecretCacheRepository
+	SecretCacheService services.SecretCacheServiceRessource
 }
 
-type SecretCacheRepository interface {
-	CreateSecretCache(ctx context.Context, arg store.CreateSecretCacheParams) (store.SecretCache, error)
-	GetSecretCache(ctx context.Context, id string) (store.SecretCache, error)
-	GetSecretCaches(ctx context.Context) ([]store.SecretCache, error)
+func (rs secretCacheRessource) Routes(s *fuego.Server) {
+	secretCacheRoutesGroupe := fuego.Group(s, "/secret-caches")
+	fuego.Get(secretCacheRoutesGroupe, "/{id}", rs.SecretCachePage)
+	fuego.Post(secretCacheRoutesGroupe, "/{id}", rs.PostSecretCacheImageUrl)
 }
 
-func (rs Ressource) SecretCachePage(c fuego.ContextNoBody) (fuego.Templ, error) {
-	id := c.QueryParam("id")
-
-	secretCache, err := rs.SecretCacheRepository.GetSecretCache(c.Context(), id)
-
+func (rs secretCacheRessource) SecretCachePage(c fuego.ContextNoBody) (fuego.Templ, error) {
+	secretCache, err := rs.SecretCacheService.GetSecretCacheById(c)
 	if err != nil {
-		return nil, fmt.Errorf("error getting secret cache %s: %w", id, err)
+		return nil, fmt.Errorf("Error. Getting secret cache failed.")
 	}
 
-	return pages.SecretCachePage(secretCache), nil
+	return pages.SecretCachePage(*secretCache), nil
+}
+
+func (rs secretCacheRessource) PostSecretCacheImageUrl(c *fuego.ContextNoBody) (any, error) {
+	secretCache, err := rs.SecretCacheService.PostSecretCacheImage(c)
+	if err != nil {
+		return nil, fmt.Errorf("Error. Uploading secret cache image failed.")
+	}
+
+	return c.Redirect(301, "/secret-caches/"+secretCache.ID)
 }

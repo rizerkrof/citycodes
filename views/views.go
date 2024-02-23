@@ -1,13 +1,19 @@
 package views
 
 import (
+	"citycodes/services"
+
 	"github.com/go-fuego/fuego"
 )
 
 type Ressource struct {
-	SecretCacheRepository SecretCacheRepository
+	SecretCacheRepository services.SecretCacheRepository
 }
 
 func (rs Ressource) Routes(s *fuego.Server) {
-	fuego.Get(s, "/secretCacheCode", rs.SecretCachePage)
+	secretCacheRessource{
+		SecretCacheService: services.SecretCacheServiceRessource{
+			SecretCacheRepository: rs.SecretCacheRepository,
+		},
+	}.Routes(s)
 }
